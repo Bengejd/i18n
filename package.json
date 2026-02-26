@@ -55,7 +55,7 @@
     "lint:eslint": "eslint --config .eslintrc.js --max-warnings 0 'src/**/*'",
     "lint:typescript": "tsc --noEmit",
     "test": "jest --watch --coverage",
-    "test:ci": "jest --ci --coverage --verbose"
+    "test:ci": "jest --ci --coverage --verbose && npm run lint"
   },
   "typings": "./typings",
   "version": "4.5.2"

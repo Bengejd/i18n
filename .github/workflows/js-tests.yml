@@ -2,7 +2,7 @@
 name: js-tests
 
 on:
-  pull_request_target:
+  pull_request:
   push:
     branches:
       - main
@@ -14,7 +14,7 @@ jobs:
     name: Tests with Node ${{ matrix.node }}
     runs-on: "ubuntu-latest"
     if: |
-      github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target' ||
+      github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' ||
       github.actor != 'dependabot[bot]'
     strategy:
       fail-fast: false
@@ -26,20 +26,16 @@ jobs:
 
       - uses: actions/cache@v4
         with:
-          path: vendor/bundle
+          path: ~/.npm
           key: >
-            ${{ runner.os }}-${{ matrix.node }}-npm-${{ hashFiles('package.json') }}
+            ${{ runner.os }}-${{ matrix.node }}-npm-${{ hashFiles('package-lock.json') }}
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
 
       - name: Install npm dependencies
-        run: |
-          yarn install
+        run: npm ci
 
       - name: Run Tests
-        run: |
-          export PATH="node_modules/.bin:$PATH"
-          yarn test:ci
-          yarn lint
+        run: npm run test:ci
