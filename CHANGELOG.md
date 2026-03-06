@@ -14,7 +14,7 @@ Prefix your message with one of the following:
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## v4.5.4 - Mar 6, 2026
+## Unreleased
 
 - [Changed] Update lodash to lodash-es for better tree-shaking.
 - [Changed] Update `jest` configuration to leverage `@babel/preset-env` for ESM module support.
